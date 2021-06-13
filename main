@@ -1,0 +1,105 @@
+#include <iostream>
+#include <windows.h>
+#define max 10
+
+using namespace std;
+
+struct stack
+{
+    int atas;
+    string data[max];
+}T;
+
+void initStack(){
+    T.atas = -1;
+}
+
+int isEmpty(){
+    if(T.atas == -1)
+        return 1;
+    else
+        return 0;
+}
+
+int isFull(){
+    if(T.atas == max - 1)
+        return 1;
+    else
+        return 0;
+}
+
+void push(string data){
+    if(isEmpty() == 1){
+        T.atas++;
+        T.data[T.atas] = data;
+        cout << "Kata " << data << " masuk ke dalam stack" << endl;
+    }
+    else if(isFull() == 0) {
+        T.atas++;
+        T.data[T.atas] = data;
+        cout << "Kata " << data << " Masukkan ke dalam stack" << endl;
+    }
+    else{
+        cout << "Tumpukam penuh" << endl;
+    }
+}
+
+void pop(){
+    if(isEmpty() == 0){
+        T.atas--;
+        cout << "Data teratas terambil" << endl;
+    }
+    else{
+        cout << "Tupukam kosong" << endl;
+    }
+}
+
+void tampil(){
+    if(isEmpty() == 0){
+            cout << "Kata: ";
+        for(int i = 0; i <= T.atas; i++){
+            cout << T.data[i];
+            cout << " ";
+        }
+        cout << endl;
+    }
+    else{
+        cout << "Tumpukan kosong" << endl;
+    }
+}
+
+int main(){
+    int pilihan;
+    string kata;
+
+    initStack();
+
+    do{
+        system("cls");
+        cout << "|======= Menu =======|" << endl;
+        cout << "|1. Memasukkan data  |" << endl;
+        cout << "|2. Menghapus data   |" << endl;
+        cout << "|3. Menampilkan data |" << endl;
+        cout << "|4. keluar           |" << endl;
+        cout << "|====================|" << endl;
+        cout << endl;
+
+        cout << "Masukkan pilihan: "; cin >> pilihan;
+        if(pilihan == 1){
+            cout << "Masukkan data: "; cin >> kata;
+            push(kata);
+        }
+        else if(pilihan == 2){
+            pop();
+        }
+        else if(pilihan == 3){
+            tampil();
+        }
+        else{
+            return 0;
+        }
+        system("pause");
+    }while(pilihan != 4);
+
+    return 0;
+}
